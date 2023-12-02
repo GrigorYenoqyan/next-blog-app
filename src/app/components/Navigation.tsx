@@ -1,20 +1,15 @@
 "use client";
-import React, { useState } from "react";
-import {
-  UnorderedListOutlined,
-  PlusOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-} from "@ant-design/icons";
+import React from "react";
+import { UnorderedListOutlined, PlusOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import Image from "next/image";
 
-import { Layout, Menu, Button, theme, Avatar, Card } from "antd";
+import { Layout, Menu } from "antd";
 
-const { Header, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -38,9 +33,11 @@ const pathnames: Record<string, string> = {
 };
 
 const items: MenuItem[] = [
-  //   getItem("Todo list", "1", <UnorderedListOutlined />),
-  //   getItem("Create ", "2", <PlusOutlined />),
-  getItem(<Link href="/posts">Posts list</Link>, "1", <UnorderedListOutlined />),
+  getItem(
+    <Link href="/posts">Posts list</Link>,
+    "1",
+    <UnorderedListOutlined />
+  ),
   getItem(<Link href="/create">Create</Link>, "2", <PlusOutlined />),
 ];
 
@@ -49,10 +46,6 @@ type Props = {
 };
 
 const Nav: React.FC<Props> = ({ children }) => {
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
   const pathname = usePathname();
 
   return (
@@ -66,13 +59,18 @@ const Nav: React.FC<Props> = ({ children }) => {
           top: 0,
           bottom: 0,
         }}
-        trigger={null}
-        collapsible
-        // className="h-screen"
-        collapsed={collapsed}
       >
+        <div className="pt-4 pb-4">
+          <Image
+            className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
+            src="/next.svg"
+            alt="Next.js Logo"
+            width={200}
+            height={37}
+            priority
+          />
+        </div>
         <Menu
-          // className="mt-16"
           theme="dark"
           mode="inline"
           defaultSelectedKeys={[pathnames[pathname]]}
@@ -80,30 +78,15 @@ const Nav: React.FC<Props> = ({ children }) => {
         />
       </Sider>
       <Layout style={{ marginLeft: 200 }}>
-          {/* <Header style={{ padding: 0, background: colorBgContainer }}>
-            <Button
-              type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
-              style={{
-                fontSize: "16px",
-                width: 64,
-                height: 64,
-              }}
-            />{" "}
-            Todo List
-          </Header> */}
-          <Content
-            style={{
-              margin: "24px 16px",
-              padding: 24,
-              minHeight: "100vh",
-              // background: colorBgContainer,
-            }}
-            className="h-full"
-          >
-            {children}
-          </Content>
+        <Content
+          style={{
+            margin: "24px 16px",
+            padding: 24,
+            minHeight: "100vh",
+          }}
+        >
+          {children}
+        </Content>
       </Layout>
     </Layout>
   );

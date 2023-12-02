@@ -2,7 +2,6 @@ import Nav from "./components/Navigation";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-// import { MantineProvider, createTheme } from "@mantine/core";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,9 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true} className={inter.className}>
-        {/* <MantineProvider theme={createTheme({})}> */}
           <Nav>{children}</Nav>
-        {/* </MantineProvider> */}
       </body>
     </html>
   );

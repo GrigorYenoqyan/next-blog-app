@@ -1,6 +1,6 @@
 import * as React from "react";
 import { prisma } from "@/db";
-import { Card, Space, Typography } from "antd";
+import { Card, Space } from "antd";
 import Link from "next/link";
 
 const getPosts = async () => {
