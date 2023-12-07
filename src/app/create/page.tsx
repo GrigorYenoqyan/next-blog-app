@@ -1,8 +1,5 @@
 import { prisma } from "@/db";
-import { Form, Input } from "antd";
-import TextArea from "antd/es/input/TextArea";
 import { redirect } from "next/navigation";
-import { Textarea } from "@mantine/core";
 
 async function createPost(data: FormData) {
   "use server";
@@ -28,31 +25,49 @@ async function createPost(data: FormData) {
 export default function Home() {
   return (
     <>
-      <form action={createPost}>
-        <div>
-          <input type="text" name="title" />
+      <form
+        action={createPost}
+        className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md"
+      >
+        <div className="mb-4">
+          <label
+            htmlFor="title"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Post Title
+          </label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+            placeholder="Enter the title"
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="content"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Content
+          </label>
+          <textarea
+            id="content"
+            name="content"
+            rows={4}
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+            placeholder="Enter the content"
+          ></textarea>
         </div>
         <div>
-          <textarea name="content" />
-        </div>
-        <div>
-          <button type="submit">Create a Post</button>
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white font-bold py-2 px-4 border-none rounded-md focus:outline-none hover:bg-blue-600"
+          >
+            Create a Post
+          </button>
         </div>
       </form>
-      {/* <Form
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 14 }}
-        layout="horizontal"
-        // disabled={componentDisabled}
-        style={{ maxWidth: 600 }}
-      >
-        <Form.Item label="Input">
-          <Input name="title" />
-        </Form.Item>
-        <Form.Item label="TextArea">
-          <TextArea name="content" rows={4} />
-        </Form.Item>
-      </Form> */}
     </>
   );
 }
